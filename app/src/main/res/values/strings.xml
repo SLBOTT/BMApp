@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">BMApp</string>
+    <string name="app_title">Badminton Fee Calculator</string>
+    <string name="hint_number_of_players">Number of Players</string>
+    <string name="hint_court_fees">Court Fees ($)</string>
+    <string name="hint_shuttle_fees">Shuttle Fees ($)</string>
+    <string name="btn_calculate">CALCULATE</string>
+    <string name="result_total">Total Amount: $%.2f</string>
+    <string name="result_per_player">Amount per player: $%.2f</string>
+    <string name="result_total_placeholder">Total Amount: $0.00</string>
+    <string name="result_per_player_placeholder">Amount per player: $0.00</string>
+    <string name="error_empty_players">Please enter number of players</string>
+    <string name="error_empty_court_fees">Please enter court fees</string>
+    <string name="error_empty_shuttle_fees">Please enter shuttle fees</string>
+    <string name="error_invalid_players">Number of players must be greater than 0</string>
+    <string name="error_negative_fees">Fees cannot be negative</string>
+    <string name="error_invalid_numbers">Please enter valid numbers</string>
+</resources>
