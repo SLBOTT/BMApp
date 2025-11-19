@@ -65,6 +65,20 @@
     <string name="today_cost">අද ගාන</string>
     <string name="debtors">ණයකාරයො</string>
 
+    <!-- Main Activity Strings -->
+    <string name="app_title_sinhala">බැඩ්මින්ටන් ගණනය</string>
+    <string name="persistent_info">ස්ථිර තොරතුරු (සුරකිනු ලැබේ)</string>
+    <string name="hint_court_fee">කෝට් ගාස්තුව</string>
+    <string name="hint_num_members">සාමාජිකයන් ගණන</string>
+    <string name="daily_details">දෛනික විස්තර</string>
+    <string name="hint_shuttle_cost">ෂටල් ගාස්තුව</string>
+    <string name="hint_non_members">සාමාජික නොවන අය ගණන</string>
+    <string name="btn_calculate_sinhala">ගණනය කරන්න</string>
+    <string name="calculation_results">ගණනය කිරීමේ ප්‍රතිඵල</string>
+    <string name="for_members">සාමාජිකයන්ට:</string>
+    <string name="for_non_members">සාමාජික නොවන අයට:</string>
+    <string name="debtors_sinhala">ණයකරුවන්</string>
+
     <!-- Add this line to fix your specific error -->
     <string name="btn_clear">Clear</string>
 </resources>

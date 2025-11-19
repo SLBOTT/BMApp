@@ -20,12 +20,69 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="බැඩ්මින්ටන් ගණනය"
+                android:text="@string/app_title_sinhala"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_marginBottom="24dp"
                 android:textColor="@color/purple_700" />
+
+            <!-- Persistent Fields Section (Court Fee & Members) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="8dp"
+                app:cardBackgroundColor="#E3F2FD">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/persistent_info"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="12dp"
+                        android:textColor="@color/purple_700" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:hint="@string/hint_court_fee"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_court_fee"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_num_members"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_num_of_members"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Input Fields Section -->
             <com.google.android.material.card.MaterialCardView
@@ -44,7 +101,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="විස්තර"
+                        android:text="@string/daily_details"
                         android:textStyle="bold"
                         android:textSize="18sp"
                         android:layout_marginBottom="16dp" />
@@ -53,35 +110,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:hint="කෝට් ගාස්තුව">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_court_fee"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:hint="සාමාජිකයන් ගණන">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_num_of_members"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:hint="ෂටල් ගාස්තුව">
+                        android:hint="@string/hint_shuttle_cost">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_shuttle_fees"
@@ -95,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:hint="සාමාජික නොවන අය ගණන">
+                        android:hint="@string/hint_non_members">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_num_of_non_members"
@@ -109,7 +138,7 @@
                         android:id="@+id/btn_calculate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ගණනය කරන්න"
+                        android:text="@string/btn_calculate_sinhala"
                         android:backgroundTint="@color/purple_500"
                         android:layout_marginTop="8dp" />
 
@@ -136,7 +165,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ගණනය කිරීමේ ප්‍රතිඵල"
+                        android:text="@string/calculation_results"
                         android:textStyle="bold"
                         android:textSize="18sp"
                         android:layout_marginBottom="16dp" />
@@ -151,7 +180,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="සාමාජිකයන්ට:"
+                            android:text="@string/for_members"
                             android:textSize="16sp" />
 
                         <TextView
@@ -173,7 +202,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="සාමාජික නොවන අයට:"
+                            android:text="@string/for_non_members"
                             android:textSize="16sp" />
 
                         <TextView
@@ -199,7 +228,7 @@
         android:id="@+id/btn_players"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ණයකරුවන්"
+        android:text="@string/debtors_sinhala"
         android:backgroundTint="@color/purple_500"
         android:layout_marginTop="16dp" />
 

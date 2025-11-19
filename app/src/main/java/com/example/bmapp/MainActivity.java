@@ -1,7 +1,10 @@
 package com.example.bmapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +17,10 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String PREFS_NAME = "BadmintonMainPrefs";
+    private static final String KEY_COURT_FEE = "court_fee";
+    private static final String KEY_NUM_MEMBERS = "num_members";
+
     private EditText etCourtFee;
     private EditText etNumOfMembers;
     private EditText etShuttleFees;
@@ -23,14 +30,24 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvPaymentForMember;
     private TextView tvPaymentForNonMember;
     private View cardResults;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
         // Initialize views
         initializeViews();
+
+        // Load saved persistent data
+        loadPersistentData();
+
+        // Set up text watchers for persistent fields
+        setupPersistentFieldWatchers();
 
         // Set click listeners
         btnCalculate.setOnClickListener(v -> calculateFeePerPlayer());
@@ -50,6 +67,56 @@ public class MainActivity extends AppCompatActivity {
         tvPaymentForMember = findViewById(R.id.tv_payment_for_member);
         tvPaymentForNonMember = findViewById(R.id.tv_payment_for_non_member);
         cardResults = findViewById(R.id.card_results);
+    }
+
+    private void loadPersistentData() {
+        // Load saved court fee
+        String savedCourtFee = sharedPreferences.getString(KEY_COURT_FEE, "");
+        if (!savedCourtFee.isEmpty()) {
+            etCourtFee.setText(savedCourtFee);
+        }
+
+        // Load saved number of members
+        String savedNumMembers = sharedPreferences.getString(KEY_NUM_MEMBERS, "");
+        if (!savedNumMembers.isEmpty()) {
+            etNumOfMembers.setText(savedNumMembers);
+        }
+    }
+
+    private void setupPersistentFieldWatchers() {
+        // Watch for court fee changes
+        etCourtFee.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                savePersistentData(KEY_COURT_FEE, s.toString());
+            }
+        });
+
+        // Watch for number of members changes
+        etNumOfMembers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                savePersistentData(KEY_NUM_MEMBERS, s.toString());
+            }
+        });
+    }
+
+    private void savePersistentData(String key, String value) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.apply();
     }
 
     private void calculateFeePerPlayer() {
