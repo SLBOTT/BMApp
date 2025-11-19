@@ -79,6 +79,13 @@
     <string name="for_non_members">සාමාජික නොවන අයට:</string>
     <string name="debtors_sinhala">ණයකරුවන්</string>
 
+    <!-- Players Activity Sinhala -->
+    <string name="btn_back_sinhala">ආපසු</string>
+    <string name="btn_add_debtor">අලුත් ණයකාරයෙක්</string>
+    <string name="debtor_name">ණයකාරයා</string>
+    <string name="debt_amount">ණය</string>
+    <string name="debt_cleared">ණය ඉවරයි</string>
+
     <!-- Add this line to fix your specific error -->
     <string name="btn_clear">Clear</string>
 </resources>
