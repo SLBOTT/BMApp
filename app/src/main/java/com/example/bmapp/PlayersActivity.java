@@ -22,7 +22,6 @@ import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.List;
 
 public class PlayersActivity extends AppCompatActivity {
 
@@ -240,11 +239,10 @@ public class PlayersActivity extends AppCompatActivity {
 
         TextView tvPlayerName = playerView.findViewById(R.id.tv_player_name);
         TextView tvPlayerAmount = playerView.findViewById(R.id.tv_player_amount);
-        MaterialButton btnUpdate = playerView.findViewById(R.id.btn_update_player);
         MaterialButton btnDelete = playerView.findViewById(R.id.btn_delete_player);
 
         // Add null checks
-        if (tvPlayerName == null || tvPlayerAmount == null || btnUpdate == null || btnDelete == null) {
+        if (tvPlayerName == null || tvPlayerAmount == null || btnDelete == null) {
             showError("Error loading player view");
             return;
         }
@@ -254,12 +252,16 @@ public class PlayersActivity extends AppCompatActivity {
 
         // Use WeakReference to prevent memory leaks
         WeakReference<View> playerViewRef = new WeakReference<>(playerView);
-        btnUpdate.setOnClickListener(v -> {
+
+        // Make the entire row clickable for editing
+        playerView.setOnClickListener(v -> {
             View view = playerViewRef.get();
             if (view != null) {
                 showEditPlayerDialog(player, view);
             }
         });
+
+        // Delete button functionality
         btnDelete.setOnClickListener(v -> {
             View view = playerViewRef.get();
             if (view != null) {

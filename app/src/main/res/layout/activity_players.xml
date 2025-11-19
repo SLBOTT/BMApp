@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
-            android:text="ආපසු"
+            android:text="@string/btn_back_sinhala"
             android:textColor="#673AB7"
             android:textSize="14sp"
             app:iconTint="#9C27B0"
@@ -32,7 +32,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:backgroundTint="@color/purple_500"
-            android:text="අලුත් ණයකාරයෙක්" />
+            android:text="@string/btn_add_debtor" />
 
     </RelativeLayout>
 
@@ -59,27 +59,18 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="@string/debtor_name"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="ණයකාරයා"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:gravity="center"
-                    android:text="ණය"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/btn_edit"
+                    android:text="@string/debt_amount"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -117,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/purple_200"
-            android:text="ණය ඉවරයි"
+            android:text="@string/debt_cleared"
             android:textColor="@color/material_dynamic_tertiary10" />
 
     </LinearLayout>
