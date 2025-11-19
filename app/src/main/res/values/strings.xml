@@ -61,6 +61,10 @@
     <string name="no_players_to_clear">No players to clear</string>
     <string name="amount_format">$%s</string>
     
+    <!-- Sinhala Text -->
+    <string name="today_cost">අද ගාන</string>
+    <string name="debtors">ණයකාරයො</string>
+
     <!-- Add this line to fix your specific error -->
     <string name="btn_clear">Clear</string>
 </resources>

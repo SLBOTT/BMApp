@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This drawable will be used when you add your background image -->
+<!-- To use this:
+     1. Copy main_page.jpg from Downloads to app/src/main/res/drawable/
+     2. Rename it to main_page_bg.jpg
+     3. Change activity_main.xml background to @drawable/main_page_with_image
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background image - uncomment when image is added -->
+    <!--
+    <item>
+        <bitmap
+            android:src="@drawable/main_page_bg"
+            android:gravity="center"
+            android:scaleType="centerCrop" />
+    </item>
+    -->
+
+    <!-- Gradient background as default -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#4CAF50"
+                android:endColor="#E8F5E8"
+                android:angle="135"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- Semi-transparent overlay for text readability -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#30FFFFFF" />
+        </shape>
+    </item>
+</layer-list>
+
