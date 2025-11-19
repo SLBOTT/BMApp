@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,9 +12,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.lang.ref.WeakReference;
 import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -25,7 +24,6 @@ public class PlayersActivity extends AppCompatActivity {
 
     private LinearLayout playersContainer;
     private Button btnBack, btnAdd, btnClear;
-    private TextView tvEmptyState;
     private List<Player> playersList;
     private DecimalFormat df;
 
@@ -46,11 +44,11 @@ public class PlayersActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        playersContainer = findViewById(R.id.players_container);
+        playersContainer = findViewById(R.id.players_table_container);
         btnBack = findViewById(R.id.btn_back);
         btnAdd = findViewById(R.id.btn_add);
         btnClear = findViewById(R.id.btn_clear);
-        tvEmptyState = findViewById(R.id.tv_empty_state);
+        // tvEmptyState = findViewById(R.id.tv_empty_state); // Remove this for now since layout changed
     }
 
     private void setupClickListeners() {
@@ -71,19 +69,96 @@ public class PlayersActivity extends AppCompatActivity {
         builder.setView(dialogView)
                 .setTitle(getString(R.string.dialog_add_player_title))
                 .setPositiveButton(getString(R.string.btn_add), (dialog, which) -> {
-                    String name = etPlayerName.getText().toString().trim();
-                    String amountStr = etPlayerAmount.getText().toString().trim();
+                    String name = etPlayerName.getText() != null ? etPlayerName.getText().toString().trim() : "";
+                    String amountStr = etPlayerAmount.getText() != null ? etPlayerAmount.getText().toString().trim() : "";
 
                     if (validatePlayerInput(name, amountStr)) {
                         double amount = Double.parseDouble(amountStr);
                         Player player = new Player(name, amount);
                         playersList.add(player);
                         addPlayerView(player);
-                        updateEmptyState();
                     }
                 })
                 .setNegativeButton(getString(R.string.btn_cancel), null)
                 .show();
+    }
+
+    private void showEditPlayerDialog(Player player, View playerView) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_edit_player, null);
+
+        TextInputEditText etPlayerName = dialogView.findViewById(R.id.et_edit_player_name);
+        TextInputEditText etPlayerAmount = dialogView.findViewById(R.id.et_edit_player_amount);
+
+        // Pre-fill with current values
+        etPlayerName.setText(player.getName());
+        etPlayerAmount.setText(String.valueOf(player.getAmount()));
+
+        builder.setView(dialogView)
+                .setTitle(getString(R.string.dialog_edit_player_title))
+                .setPositiveButton(getString(R.string.btn_update), (dialog, which) -> {
+                    String name = etPlayerName.getText() != null ? etPlayerName.getText().toString().trim() : "";
+                    String amountStr = etPlayerAmount.getText() != null ? etPlayerAmount.getText().toString().trim() : "";
+
+                    if (validatePlayerEditInput(name, amountStr, player)) {
+                        double amount = Double.parseDouble(amountStr);
+                        String oldName = player.getName();
+
+                        // Update player data
+                        player.setName(name);
+                        player.setAmount(amount);
+
+                        // Update the view
+                        updatePlayerView(playerView, player);
+
+                        showMessage(getString(R.string.player_updated, name));
+                    }
+                })
+                .setNegativeButton(getString(R.string.btn_cancel), null)
+                .show();
+    }
+
+    private boolean validatePlayerEditInput(String name, String amountStr, Player currentPlayer) {
+        if (name.isEmpty()) {
+            showError(getString(R.string.error_empty_player_name));
+            return false;
+        }
+
+        if (amountStr.isEmpty()) {
+            showError(getString(R.string.error_empty_player_amount));
+            return false;
+        }
+
+        try {
+            double amount = Double.parseDouble(amountStr);
+            if (amount < 0) {
+                showError(getString(R.string.error_negative_amount));
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showError(getString(R.string.error_invalid_amount));
+            return false;
+        }
+
+        // Check for duplicate names (excluding current player)
+        for (Player player : playersList) {
+            if (player != currentPlayer && player.getName().equalsIgnoreCase(name)) {
+                showError(getString(R.string.error_duplicate_player));
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void updatePlayerView(View playerView, Player player) {
+        TextView tvPlayerName = playerView.findViewById(R.id.tv_player_name);
+        TextView tvPlayerAmount = playerView.findViewById(R.id.tv_player_amount);
+
+        if (tvPlayerName != null && tvPlayerAmount != null) {
+            tvPlayerName.setText(player.getName());
+            tvPlayerAmount.setText(getString(R.string.amount_format, df.format(player.getAmount())));
+        }
     }
 
     private boolean validatePlayerInput(String name, String amountStr) {
@@ -120,14 +195,15 @@ public class PlayersActivity extends AppCompatActivity {
     }
 
     private void addPlayerView(Player player) {
-        View playerView = LayoutInflater.from(this).inflate(R.layout.item_player, null);
+        View playerView = LayoutInflater.from(this).inflate(R.layout.item_player_row, null);
 
         TextView tvPlayerName = playerView.findViewById(R.id.tv_player_name);
         TextView tvPlayerAmount = playerView.findViewById(R.id.tv_player_amount);
+        MaterialButton btnUpdate = playerView.findViewById(R.id.btn_update_player);
         MaterialButton btnDelete = playerView.findViewById(R.id.btn_delete_player);
 
         // Add null checks
-        if (tvPlayerName == null || tvPlayerAmount == null || btnDelete == null) {
+        if (tvPlayerName == null || tvPlayerAmount == null || btnUpdate == null || btnDelete == null) {
             showError("Error loading player view");
             return;
         }
@@ -137,6 +213,12 @@ public class PlayersActivity extends AppCompatActivity {
 
         // Use WeakReference to prevent memory leaks
         WeakReference<View> playerViewRef = new WeakReference<>(playerView);
+        btnUpdate.setOnClickListener(v -> {
+            View view = playerViewRef.get();
+            if (view != null) {
+                showEditPlayerDialog(player, view);
+            }
+        });
         btnDelete.setOnClickListener(v -> {
             View view = playerViewRef.get();
             if (view != null) {
@@ -154,7 +236,6 @@ public class PlayersActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.btn_delete), (dialog, which) -> {
                     playersList.remove(player);
                     playersContainer.removeView(playerView);
-                    updateEmptyState();
                     showMessage(getString(R.string.player_deleted, player.getName()));
                 })
                 .setNegativeButton(getString(R.string.btn_cancel), null)
@@ -173,7 +254,6 @@ public class PlayersActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.btn_clear), (dialog, which) -> {
                     playersList.clear();
                     playersContainer.removeAllViews();
-                    updateEmptyState();
                     showMessage(getString(R.string.all_players_cleared));
                 })
                 .setNegativeButton(getString(R.string.btn_cancel), null)
@@ -188,13 +268,7 @@ public class PlayersActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void updateEmptyState() {
-        if (playersList.isEmpty()) {
-            tvEmptyState.setVisibility(View.VISIBLE);
-        } else {
-            tvEmptyState.setVisibility(View.GONE);
-        }
-    }
+
 
     // Player model class
     public static class Player {
@@ -208,6 +282,10 @@ public class PlayersActivity extends AppCompatActivity {
 
         public String getName() {
             return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public double getAmount() {

@@ -25,11 +25,19 @@
     <string name="players_list_header">Player Payments</string>
     <string name="no_players_message">No players added yet.\nTap "ADD PLAYER" to get started.</string>
 
+    <!-- Table Headers -->
+    <string name="header_name">Player Name</string>
+    <string name="header_amount">Amount</string>
+    <string name="header_actions">Actions</string>
+
     <!-- Add Player Dialog -->
     <string name="dialog_add_player_title">Add New Player</string>
+    <string name="dialog_edit_player_title">Edit Player</string>
     <string name="hint_player_name">Player Name</string>
     <string name="hint_player_amount">Amount ($)</string>
     <string name="btn_add">Add</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_update">Update</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_delete">Delete</string>
 
@@ -48,6 +56,7 @@
 
     <!-- Messages -->
     <string name="player_deleted">%s removed successfully</string>
+    <string name="player_updated">%s updated successfully</string>
     <string name="all_players_cleared">All players cleared</string>
     <string name="no_players_to_clear">No players to clear</string>
     <string name="amount_format">$%s</string>
