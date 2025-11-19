@@ -107,13 +107,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // Calculate payments - total fees divided equally among all players
-            double totalFees = courtFee + shuttleFees;
-            double paymentPerPlayer = totalFees / totalPlayers;
+            double courtFeesPerPlayer = courtFee / totalPlayers;
+            double shuttleFeesPerPlayer = shuttleFees / totalPlayers;
+            double paymentForNonMember = courtFeesPerPlayer + shuttleFeesPerPlayer;
+            double paymentForMember = shuttleFeesPerPlayer - (courtFee / numMembers) + courtFeesPerPlayer; // Members get court fee discount
 
 
             // Display results (same amount for both members and non-members in this version)
-            tvPaymentForMember.setText(String.format(Locale.getDefault(), "රු %.2f", paymentPerPlayer));
-            tvPaymentForNonMember.setText(String.format(Locale.getDefault(), "රු %.2f", paymentPerPlayer));
+            tvPaymentForMember.setText(String.format(Locale.getDefault(), "රු %.2f", paymentForMember));
+            tvPaymentForNonMember.setText(String.format(Locale.getDefault(), "රු %.2f", paymentForNonMember));
 
             // Make results card visible
             cardResults.setVisibility(View.VISIBLE);
