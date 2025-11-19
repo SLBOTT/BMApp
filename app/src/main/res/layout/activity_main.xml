@@ -13,12 +13,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_title"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@color/primary_color"
+        android:layout_marginBottom="32dp"
         android:gravity="center"
-        android:layout_marginBottom="32dp" />
+        android:text="@string/app_title"
+        android:textColor="@color/purple_500"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <!-- Card container for input fields -->
     <androidx.cardview.widget.CardView
@@ -44,7 +44,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_number_of_players"
-                    android:layout_width="307dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:maxLines="1" />
@@ -90,10 +90,10 @@
                 android:id="@+id/btn_calculate"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="@string/btn_calculate"
-                android:textSize="16sp"
+                android:backgroundTint="@color/purple_500"
+                android:text="අද ගාන"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:backgroundTint="@color/primary_color"
                 app:cornerRadius="8dp" />
 
         </LinearLayout>
@@ -150,14 +150,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_players"
-        app:cornerRadius="8dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/accent_color"
-        android:text="@string/btn_players"
+        android:backgroundTint="@color/purple_200"
+        android:text="ණයකාරයො"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp" />
 
 </LinearLayout>

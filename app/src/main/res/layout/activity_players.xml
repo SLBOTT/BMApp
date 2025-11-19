@@ -14,12 +14,16 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_back"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:text="@string/btn_back"
-            style="@style/Widget.Material3.Button.OutlinedButton" />
+            android:layout_marginStart="0dp"
+            android:text="ආපසු"
+            android:textColor="#673AB7"
+            android:textSize="14sp"
+            app:iconTint="#9C27B0"
+            app:rippleColor="#673AB7" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_add"
@@ -27,8 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:text="@string/btn_add_player"
-            android:backgroundTint="@color/primary_color" />
+            android:backgroundTint="@color/purple_500"
+            android:text="අලුත් ණයකාරයෙක්" />
 
     </RelativeLayout>
 
@@ -47,46 +51,46 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@color/purple_200"
                 android:orientation="horizontal"
-                android:padding="12dp"
-                android:background="@color/material_dynamic_primary10"
-                android:layout_marginBottom="1dp">
+                android:padding="12dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="@string/header_name"
-                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="ණයකාරයා"
                     android:textSize="14sp"
-                    android:gravity="center" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:text="@string/header_amount"
-                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="ණය"
                     android:textSize="14sp"
-                    android:gravity="center" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/btn_edit"
-                    android:textStyle="bold"
                     android:textSize="14sp"
-                    android:gravity="center" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/btn_delete"
-                    android:textStyle="bold"
                     android:textSize="14sp"
-                    android:gravity="center" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -112,8 +116,8 @@
             android:id="@+id/btn_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_clear_all"
-            android:backgroundTint="@color/material_dynamic_tertiary30"
+            android:backgroundTint="@color/purple_200"
+            android:text="ණය ඉවරයි"
             android:textColor="@color/material_dynamic_tertiary10" />
 
     </LinearLayout>
