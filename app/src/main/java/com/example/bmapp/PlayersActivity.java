@@ -1,5 +1,6 @@
 package com.example.bmapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +14,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.ref.WeakReference;
-import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.List;
 
 public class PlayersActivity extends AppCompatActivity {
+
+    private static final String PREFS_NAME = "BadmintonPlayersPrefs";
+    private static final String PLAYERS_KEY = "players_list";
 
     private LinearLayout playersContainer;
     private Button btnBack, btnAdd, btnClear;
     private List<Player> playersList;
     private DecimalFormat df;
+    private SharedPreferences sharedPreferences;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +44,14 @@ public class PlayersActivity extends AppCompatActivity {
         // Initialize variables
         playersList = new ArrayList<>();
         df = new DecimalFormat("#0.00");
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        gson = new Gson();
 
         // Initialize views
         initializeViews();
+
+        // Load saved players data
+        loadPlayersData();
 
         // Set click listeners
         setupClickListeners();
@@ -59,6 +73,30 @@ public class PlayersActivity extends AppCompatActivity {
         btnClear.setOnClickListener(v -> showClearConfirmDialog());
     }
 
+    private void savePlayersData() {
+        String json = gson.toJson(playersList);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PLAYERS_KEY, json);
+        editor.apply();
+    }
+
+    private void loadPlayersData() {
+        String json = sharedPreferences.getString(PLAYERS_KEY, null);
+        if (json != null) {
+            Type type = new TypeToken<List<Player>>(){}.getType();
+            List<Player> savedPlayers = gson.fromJson(json, type);
+            if (savedPlayers != null) {
+                playersList.clear();
+                playersList.addAll(savedPlayers);
+
+                // Display loaded players
+                for (Player player : playersList) {
+                    addPlayerView(player);
+                }
+            }
+        }
+    }
+
     private void showAddPlayerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_player, null);
@@ -77,6 +115,7 @@ public class PlayersActivity extends AppCompatActivity {
                         Player player = new Player(name, amount);
                         playersList.add(player);
                         addPlayerView(player);
+                        savePlayersData();
                     }
                 })
                 .setNegativeButton(getString(R.string.btn_cancel), null)
@@ -102,7 +141,6 @@ public class PlayersActivity extends AppCompatActivity {
 
                     if (validatePlayerEditInput(name, amountStr, player)) {
                         double amount = Double.parseDouble(amountStr);
-                        String oldName = player.getName();
 
                         // Update player data
                         player.setName(name);
@@ -110,6 +148,9 @@ public class PlayersActivity extends AppCompatActivity {
 
                         // Update the view
                         updatePlayerView(playerView, player);
+
+                        // Save the updated data
+                        savePlayersData();
 
                         showMessage(getString(R.string.player_updated, name));
                     }
@@ -195,7 +236,7 @@ public class PlayersActivity extends AppCompatActivity {
     }
 
     private void addPlayerView(Player player) {
-        View playerView = LayoutInflater.from(this).inflate(R.layout.item_player_row, null);
+        View playerView = LayoutInflater.from(this).inflate(R.layout.item_player_row, playersContainer, false);
 
         TextView tvPlayerName = playerView.findViewById(R.id.tv_player_name);
         TextView tvPlayerAmount = playerView.findViewById(R.id.tv_player_amount);
@@ -236,6 +277,7 @@ public class PlayersActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.btn_delete), (dialog, which) -> {
                     playersList.remove(player);
                     playersContainer.removeView(playerView);
+                    savePlayersData();
                     showMessage(getString(R.string.player_deleted, player.getName()));
                 })
                 .setNegativeButton(getString(R.string.btn_cancel), null)
@@ -254,6 +296,7 @@ public class PlayersActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.btn_clear), (dialog, which) -> {
                     playersList.clear();
                     playersContainer.removeAllViews();
+                    savePlayersData();
                     showMessage(getString(R.string.all_players_cleared));
                 })
                 .setNegativeButton(getString(R.string.btn_cancel), null)
