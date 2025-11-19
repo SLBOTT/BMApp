@@ -15,4 +15,43 @@
     <string name="error_invalid_players">Number of players must be greater than 0</string>
     <string name="error_negative_fees">Fees cannot be negative</string>
     <string name="error_invalid_numbers">Please enter valid numbers</string>
+
+    <!-- Players Activity -->
+    <string name="btn_players">PLAYERS</string>
+    <string name="players_title">Players</string>
+    <string name="btn_back">← Back</string>
+    <string name="btn_add_player">ADD PLAYER</string>
+    <string name="btn_clear_all">CLEAR ALL</string>
+    <string name="players_list_header">Player Payments</string>
+    <string name="no_players_message">No players added yet.\nTap "ADD PLAYER" to get started.</string>
+
+    <!-- Add Player Dialog -->
+    <string name="dialog_add_player_title">Add New Player</string>
+    <string name="hint_player_name">Player Name</string>
+    <string name="hint_player_amount">Amount ($)</string>
+    <string name="btn_add">Add</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_delete">Delete</string>
+
+    <!-- Player Validation -->
+    <string name="error_empty_player_name">Please enter player name</string>
+    <string name="error_empty_player_amount">Please enter amount</string>
+    <string name="error_negative_amount">Amount cannot be negative</string>
+    <string name="error_invalid_amount">Please enter a valid amount</string>
+    <string name="error_duplicate_player">Player with this name already exists</string>
+
+    <!-- Confirmation Dialogs -->
+    <string name="confirm_delete_title">Delete Player</string>
+    <string name="confirm_delete_message">Are you sure you want to delete %s?</string>
+    <string name="confirm_clear_title">Clear All Players</string>
+    <string name="confirm_clear_message">Are you sure you want to remove all players? This action cannot be undone.</string>
+
+    <!-- Messages -->
+    <string name="player_deleted">%s removed successfully</string>
+    <string name="all_players_cleared">All players cleared</string>
+    <string name="no_players_to_clear">No players to clear</string>
+    <string name="amount_format">$%s</string>
+    
+    <!-- Add this line to fix your specific error -->
+    <string name="btn_clear">Clear</string>
 </resources>

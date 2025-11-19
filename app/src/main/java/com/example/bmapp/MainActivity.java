@@ -1,5 +1,6 @@
 package com.example.bmapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etCourtFees;
     private EditText etShuttleFees;
     private Button btnCalculate;
+    private Button btnPlayers;
     private TextView tvResult;
     private TextView tvTotalAmount;
 
@@ -28,8 +30,12 @@ public class MainActivity extends AppCompatActivity {
         // Initialize views
         initializeViews();
 
-        // Set click listener for calculate button
+        // Set click listeners
         btnCalculate.setOnClickListener(v -> calculateFeePerPlayer());
+        btnPlayers.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, PlayersActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void initializeViews() {
@@ -37,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         etCourtFees = findViewById(R.id.et_court_fees);
         etShuttleFees = findViewById(R.id.et_shuttle_fees);
         btnCalculate = findViewById(R.id.btn_calculate);
+        btnPlayers = findViewById(R.id.btn_players);
         tvResult = findViewById(R.id.tv_result);
         tvTotalAmount = findViewById(R.id.tv_total_amount);
     }
@@ -87,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
             double totalAmount = courtFees + shuttleFees;
             double amountPerPlayer = totalAmount / numberOfPlayers;
 
-            // Format the results
-            DecimalFormat df = new DecimalFormat("#0.00");
 
             // Display results
             tvTotalAmount.setText(getString(R.string.result_total, totalAmount));
