@@ -88,4 +88,9 @@
 
     <!-- Add this line to fix your specific error -->
     <string name="btn_clear">Clear</string>
+
+    <!-- Ui changes -->
+    <string name="background_image">Background Image</string>
+    <string name="app_icon">App Icon</string>
+
 </resources>

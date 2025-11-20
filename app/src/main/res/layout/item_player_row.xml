@@ -1,45 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/player_row_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="12dp"
-    android:background="@drawable/table_row_background"
+    android:padding="14dp"
+    android:background="@android:color/white"
     android:layout_marginBottom="1dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:foreground="?android:attr/selectableItemBackground"
+    android:elevation="1dp">
 
-    <TextView
-        android:id="@+id/tv_player_name"
+    <!-- Player Name Column -->
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:layout_gravity="center_vertical" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/tv_player_amount"
+        <TextView
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:background="@drawable/dot_indicator"
+            android:backgroundTint="#5E35B1"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/tv_player_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Player Name"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="start|center_vertical" />
+
+    </LinearLayout>
+
+    <!-- Player Amount Column -->
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:textSize="14sp"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💰"
+            android:textSize="12sp"
+            android:layout_marginEnd="4dp" />
 
+        <TextView
+            android:id="@+id/tv_player_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs. 0.00"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <!-- Delete Button Column -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete_player"
+        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="0dp"
-        android:layout_height="36dp"
+        android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="@string/btn_delete"
-        android:textSize="12sp"
-        android:layout_margin="4dp"
-        android:backgroundTint="@color/material_dynamic_error30"
-        android:textColor="@color/material_dynamic_error10" />
+        android:text="✕"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#D32F2F"
+        android:layout_gravity="center_vertical"
+        app:cornerRadius="20dp"
+        app:rippleColor="#FFCDD2"
+        android:backgroundTint="#FFEBEE"
+        app:elevation="0dp" />
 
 </LinearLayout>
-

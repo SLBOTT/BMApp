@@ -4,114 +4,254 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#F5F5F5">
 
-    <!-- Top section with Back button -->
-    <RelativeLayout
+    <!-- Top Header Bar (matching main page) -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_back"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="0dp"
-            android:text="@string/btn_back_sinhala"
-            android:textColor="#673AB7"
-            android:textSize="14sp"
-            app:iconTint="#9C27B0"
-            app:rippleColor="#673AB7" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:backgroundTint="@color/purple_500"
-            android:text="@string/btn_add_debtor" />
-
-    </RelativeLayout>
-
-    <!-- Table section -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:orientation="vertical"
+        android:background="@drawable/header_gradient"
+        android:padding="20dp"
+        android:elevation="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="50dp">
 
-            <!-- Table Header -->
-            <LinearLayout
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_back"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_back_sinhala"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:icon="@android:drawable/ic_menu_revert"
+                app:iconTint="@android:color/white"
+                app:iconGravity="start" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#E1BEE7"
+                android:textColor="#5E35B1"
+                android:textStyle="bold"
+                android:text="@string/btn_add_debtor"
+                app:cornerRadius="20dp"
+                app:icon="@android:drawable/ic_input_add"
+                app:iconTint="#5E35B1"
+                app:elevation="2dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/debtors_sinhala"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💰 Debt Management"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="#E1BEE7"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Summary Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:background="@color/purple_200"
-                android:orientation="horizontal"
-                android:padding="12dp">
+                android:layout_marginBottom="20dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="#E8F5E9"
+                app:strokeWidth="0dp">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:gravity="center"
-                    android:text="@string/debtor_name"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+            </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:text="@string/debt_amount"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/btn_delete"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <!-- Table Content Container -->
-            <LinearLayout
-                android:id="@+id/players_table_container"
+            <!-- Debtors List Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:layout_marginBottom="20dp"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/dot_indicator"
+                            android:layout_marginEnd="12dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ණය ගෙවන්නන් ලැයිස්තුව"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:textColor="#5E35B1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="👥"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <!-- Table Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:background="#E1BEE7"
+                        android:orientation="horizontal"
+                        android:padding="12dp"
+                        android:elevation="2dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:gravity="center"
+                            android:text="@string/debtor_name"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#5E35B1" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="@string/debt_amount"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#5E35B1" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/btn_delete"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#5E35B1" />
+
+                    </LinearLayout>
+
+                    <!-- Table Content Container -->
+                    <LinearLayout
+                        android:id="@+id/players_table_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <!-- Empty State -->
+                    <LinearLayout
+                        android:id="@+id/empty_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="40dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📝"
+                            android:textSize="48sp"
+                            android:layout_marginBottom="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ණය ගෙවන්නන් නැත"
+                            android:textSize="16sp"
+                            android:textColor="#999999"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="නව ණයගැති කෙනෙක් එකතු කිරීමට ඉහත බොත්තම ක්ලික් කරන්න"
+                            android:textSize="12sp"
+                            android:textColor="#CCCCCC"
+                            android:gravity="center" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
     </ScrollView>
 
-    <!-- Bottom section with Clear button -->
-    <LinearLayout
+    <!-- Bottom Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_clear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_clear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple_200"
-            android:text="@string/debt_cleared"
-            android:textColor="@color/material_dynamic_tertiary10" />
-
-    </LinearLayout>
-
+        android:layout_height="60dp"
+        android:text="@string/debt_cleared"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:icon="@android:drawable/ic_menu_delete"
+        app:iconGravity="textStart"
+        android:backgroundTint="#7E57C2"
+        android:layout_margin="20dp"
+        app:cornerRadius="30dp"
+        app:elevation="6dp" />
 
 </LinearLayout>

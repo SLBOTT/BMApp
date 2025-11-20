@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:elevation="2dp"
-    app:cardCornerRadius="8dp">
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="12dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:strokeWidth="1dp"
+    app:strokeColor="#E1BEE7">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground">
+
+        <!-- Player Avatar/Icon -->
+        <LinearLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:background="@drawable/dot_indicator"
+            android:backgroundTint="#E8F5E9"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👤"
+                android:textSize="24sp" />
+
+        </LinearLayout>
 
         <!-- Player Info -->
         <LinearLayout
@@ -26,37 +49,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Player Name"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/primary_color" />
-
-            <TextView
-                android:id="@+id/tv_player_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="$0.00"
                 android:textSize="16sp"
-                android:textColor="@color/secondary_text_color"
-                android:layout_marginTop="4dp" />
+                android:textStyle="bold"
+                android:textColor="#5E35B1"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💰"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="4dp" />
+
+                <TextView
+                    android:id="@+id/tv_player_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rs. 0.00"
+                    android:textSize="15sp"
+                    android:textColor="#2E7D32"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <!-- Delete Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_delete_player"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:text="✕"
             android:textSize="20sp"
-            android:textColor="@color/delete_color"
-            android:minWidth="0dp"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            app:cornerRadius="24dp" />
+            android:textColor="#D32F2F"
+            app:cornerRadius="24dp"
+            app:rippleColor="#FFCDD2"
+            android:backgroundTint="#FFEBEE"
+            app:elevation="0dp" />
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
